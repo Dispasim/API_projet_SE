@@ -45,8 +45,7 @@ class getSongData(APIView):
     serializer_class = ChansonSerializer
 
     def get(self, request, id, *args, **kwargs):
-        song = Musique.objects.get(id=id)   
-        path = song.fichier_audio.path     
-        return FileResponse(open(path, 'rb'))     
+        song = Musique.objects.get(id=id)        
+        return FileResponse(open("Musique.fichier_audio", 'rb'))     
 
 

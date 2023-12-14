@@ -3,7 +3,7 @@ import os
 # Create your views here.
 from rest_framework import generics
 from .models import Musique
-from .serializers import MusiqueSerializer, ChansonSerializer
+from .serializers import MusiqueSerializer
 from django.http import FileResponse, HttpResponse
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
@@ -37,16 +37,5 @@ class MusiqueFileView(APIView):
                 return Response({"message": "Fichier audio introuvable"}, status=404)
         else:
             return Response({"message": "Aucun fichier audio associé à cette musique"}, status=404)
-        
-
-        
-
-class getSongData(APIView):
-    serializer_class = ChansonSerializer
-
-    def get(self, request, id, *args, **kwargs):
-        song = Musique.objects.get(id=id)   
-        path = song.fichier_audio.path     
-        return FileResponse(open(path, 'rb'))     
 
 

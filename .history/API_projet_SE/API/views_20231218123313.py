@@ -35,7 +35,7 @@ class MusiqueDetailAPIView(generics.ListAPIView):
         
 
 class getSongData(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = ChansonSerializer
 
     def get(self, request, id, *args, **kwargs):

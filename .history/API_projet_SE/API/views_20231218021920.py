@@ -25,7 +25,8 @@ class MusiqueListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = MusiqueSerializer
 
 class MusiqueDetailAPIView(generics.RetrieveAPIView):
-    [AllowAny]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Musique.objects.all()
     serializer_class = serializers.MusiqueInfoSerializer
 

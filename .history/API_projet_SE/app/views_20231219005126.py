@@ -10,7 +10,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  
+            return redirect('login')  # Redirige vers la page de connexion après l'inscription
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'templates/signup.html', {'form': form})

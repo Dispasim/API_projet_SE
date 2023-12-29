@@ -107,3 +107,17 @@ class GetUserFromToken(APIView):
         return Response(user_data, status=status.HTTP_200_OK)    
 
 
+class APIListViewId(generics.ListAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = MusiqueSerializer
+
+    def get_queryset(self):
+        id = self.kwargs['auteur_id']  
+        return Musique.objects.filter(auteur_id=id)
+
+
+class MusiqueDeleteView(generics.DestroyAPIView):
+    permission_classes = [AllowAny]
+    queryset = Musique.objects.all()
+    serializer_class = MusiqueSerializer
+    lookup_field = 'id' 

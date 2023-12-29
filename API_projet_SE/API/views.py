@@ -85,3 +85,25 @@ class GetMusiqueInfo(APIView):
     serializer_class = serializers.MusiqueInfoSerializer
 
 
+class GetUserFromToken(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        token_key = request.query_params.get('token', None)
+        
+        if not token_key:
+            return Response({'error': 'Token non fourni'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            token = Token.objects.get(key=token_key)
+        except Token.DoesNotExist:
+            return Response({'error': 'Token invalide'}, status=status.HTTP_404_NOT_FOUND)
+        
+        user = token.user
+        user_data = {
+            'id': user.id,
+            
+            
+        }
+        return Response(user_data, status=status.HTTP_200_OK)    
+
+
